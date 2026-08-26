@@ -1,0 +1,2 @@
+flask==3.0.3
+google-genai>=1.15.0
