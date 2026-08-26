@@ -79,14 +79,14 @@
   }
 
   .goal-editor input {
-    width: 84px;
+    width: 110px;
     background: var(--surface-2);
     border: 1px solid var(--line);
     border-radius: 8px;
     color: var(--text);
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.85rem;
-    padding: 5px 8px;
+    padding: 6px 10px;
   }
 
   .goal-editor button {
@@ -94,9 +94,10 @@
     border: 1px solid var(--line);
     color: var(--text-dim);
     border-radius: 8px;
-    padding: 5px 10px;
+    padding: 6px 12px;
     font-size: 0.8rem;
     cursor: pointer;
+    transition: all 0.2s ease;
   }
   .goal-editor button:hover { border-color: var(--accent); color: var(--accent); }
 
@@ -114,7 +115,7 @@
     background: var(--surface);
     border: 1px solid var(--line);
     border-radius: var(--radius);
-    padding: 22px;
+    padding: 24px;
   }
 
   .card + .card { margin-top: 20px; }
@@ -122,17 +123,17 @@
   .card-label {
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    font-size: 0.7rem;
+    font-size: 0.72rem;
     color: var(--text-dim);
     font-weight: 600;
-    margin-bottom: 14px;
+    margin-bottom: 18px;
   }
 
   /* --- Progress ring --- */
   .ring-row {
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap: 28px;
   }
 
   .ring-wrap { position: relative; width: 148px; height: 148px; flex-shrink: 0; }
@@ -147,10 +148,19 @@
   .ring-pct { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1.5rem; }
   .ring-sub { font-size: 0.68rem; color: var(--text-dim); }
 
-  .stat-list { display: flex; flex-direction: column; gap: 10px; }
-  .stat { display: flex; justify-content: space-between; font-size: 0.88rem; }
-  .stat .k { color: var(--text-dim); }
-  .stat .v { font-family: 'JetBrains Mono', monospace; font-weight: 600; }
+  .stat-list { display: flex; flex-direction: column; gap: 12px; flex: 1; min-width: 190px; }
+  .stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    font-size: 0.9rem;
+    padding-bottom: 6px;
+    border-bottom: 1px dashed var(--line);
+  }
+  .stat:last-child { border-bottom: none; padding-bottom: 0; }
+  .stat .k { color: var(--text-dim); white-space: nowrap; }
+  .stat .v { font-family: 'JetBrains Mono', monospace; font-weight: 600; white-space: nowrap; }
   .stat .v.accent { color: var(--accent); }
 
   /* --- Weekly trail --- */
@@ -158,17 +168,18 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    gap: 8px;
-    height: 90px;
-    margin-bottom: 10px;
+    gap: 12px;
+    height: 100px;
+    margin-top: 14px;
+    margin-bottom: 16px;
   }
 
-  .trail-day { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; }
-  .print-track { height: 60px; display: flex; align-items: flex-end; }
-  .print { opacity: 0.25; transition: opacity 0.4s, transform 0.4s; transform: scale(0.85); }
-  .print.filled { opacity: 1; transform: scale(1); }
-  .print.today { filter: drop-shadow(0 0 6px var(--accent-soft)); }
-  .day-label { font-size: 0.65rem; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; }
+  .trail-day { display: flex; flex-direction: column; align-items: center; gap: 8px; flex: 1; }
+  .print-track { height: 65px; display: flex; align-items: flex-end; justify-content: center; }
+  .print { opacity: 0.45; transition: opacity 0.4s, transform 0.4s; transform: scale(0.9); }
+  .print.filled { opacity: 1; transform: scale(1.1); filter: drop-shadow(0 0 5px var(--accent-soft)); }
+  .print.today { filter: drop-shadow(0 0 8px var(--accent)); opacity: 1; }
+  .day-label { font-size: 0.75rem; color: var(--text); font-weight: 600; font-family: 'JetBrains Mono', monospace; margin-top: 4px; }
 
   .milestone-banner {
     display: flex;
@@ -178,35 +189,35 @@
     border: 1px solid #4fd1c555;
     color: var(--accent-2);
     border-radius: 10px;
-    padding: 10px 14px;
-    font-size: 0.82rem;
-    margin-top: 4px;
+    padding: 12px 16px;
+    font-size: 0.85rem;
+    margin-top: 8px;
   }
 
   .weekly-total {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 1.6rem;
+    font-size: 1.7rem;
     font-weight: 700;
   }
 
   /* --- Chat --- */
-  .chat-card { display: flex; flex-direction: column; height: 480px; }
+  .chat-card { display: flex; flex-direction: column; height: 520px; }
   .messages {
     flex: 1;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding-right: 4px;
-    margin-bottom: 12px;
+    gap: 12px;
+    padding-right: 6px;
+    margin-bottom: 14px;
   }
 
   .msg {
-    max-width: 82%;
-    padding: 10px 13px;
-    border-radius: 12px;
-    font-size: 0.9rem;
-    line-height: 1.4;
+    max-width: 84%;
+    padding: 12px 16px;
+    border-radius: 14px;
+    font-size: 0.92rem;
+    line-height: 1.45;
   }
   .msg.user {
     align-self: flex-end;
@@ -222,14 +233,14 @@
   }
   .msg.error { border-color: #a33; color: #ff9e9e; }
 
-  .chat-input-row { display: flex; gap: 8px; }
+  .chat-input-row { display: flex; gap: 10px; }
   .chat-input-row input {
     flex: 1;
     background: var(--surface-2);
     border: 1px solid var(--line);
     border-radius: 10px;
     color: var(--text);
-    padding: 11px 14px;
+    padding: 12px 16px;
     font-size: 0.9rem;
     font-family: 'Inter', sans-serif;
   }
@@ -239,26 +250,28 @@
     color: #1a0d05;
     border: none;
     border-radius: 10px;
-    padding: 0 18px;
+    padding: 0 20px;
     font-weight: 600;
     font-size: 0.9rem;
     cursor: pointer;
+    transition: opacity 0.2s ease;
   }
   .chat-input-row button:disabled { opacity: 0.5; cursor: default; }
 
-  .quick-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .quick-row { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
   .quick-btn {
     background: none;
     border: 1px dashed var(--line);
     color: var(--text-dim);
     border-radius: 20px;
-    padding: 5px 12px;
-    font-size: 0.78rem;
+    padding: 6px 14px;
+    font-size: 0.8rem;
     cursor: pointer;
+    transition: all 0.2s ease;
   }
   .quick-btn:hover { border-color: var(--accent); color: var(--accent); }
 
-  .typing { color: var(--text-dim); font-size: 0.8rem; font-style: italic; }
+  .typing { color: var(--text-dim); font-size: 0.82rem; font-style: italic; }
 </style>
 </head>
 <body>
@@ -276,7 +289,7 @@
     </div>
     <div class="goal-editor">
       <span id="goalLabel">Goal: 8,000</span>
-      <input id="goalInput" type="number" placeholder="new goal" />
+      <input id="goalInput" type="number" placeholder="New goal" />
       <button id="goalBtn">Set</button>
     </div>
   </header>
@@ -353,8 +366,8 @@ function addMsg(text, cls) {
 }
 
 function footprintSVG(filled) {
-  const color = filled ? 'var(--accent)' : 'var(--text-dim)';
-  return `<svg class="print" width="16" height="26" viewBox="0 0 24 24" fill="none">
+  const color = filled ? 'var(--accent)' : '#4a6150';
+  return `<svg class="print" width="20" height="30" viewBox="0 0 24 24" fill="none">
     <path d="M12 2C9 2 8 5 8 7c0 2.5 1.8 3.5 1.8 6 0 2-1.3 2.5-1.3 4.5 0 1.7 1.3 3 3 3s3-1.3 3-3c0-1.5-.7-2-.7-4 0-2.8 2.2-3.7 2.2-6.5 0-3-1.5-5-4-5z" fill="${color}"/>
   </svg>`;
 }

@@ -49,17 +49,15 @@ Rules for your replies:
    back to their step goal.
 """
 
-MODEL_NAME = "gemini-3.6-flash"
+MODEL_NAME = "gemini-3.5-flash"
 
 _client = None
 _chat = None
+_last_key = None
 
 
 def _get_client() -> genai.Client:
-    global _client
-    if _client is not None:
-        return _client
-
+    global _client, _last_key, _chat
     api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key and os.path.exists(".env"):
         with open(".env", "r") as f:
@@ -70,7 +68,12 @@ def _get_client() -> genai.Client:
 
     if not api_key:
         raise RuntimeError("GEMINI_API_KEY is not set. Please set the GEMINI_API_KEY environment variable or put it in a .env file.")
-    _client = genai.Client(api_key=api_key)
+
+    if _client is None or api_key != _last_key:
+        _last_key = api_key
+        _client = genai.Client(api_key=api_key)
+        _chat = None  # Reset active chat session to use new client
+
     return _client
 
 
