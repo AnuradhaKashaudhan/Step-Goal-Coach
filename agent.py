@@ -62,9 +62,12 @@ def _get_client() -> genai.Client:
     if not api_key and os.path.exists(".env"):
         with open(".env", "r") as f:
             for line in f:
-                if line.startswith("GEMINI_API_KEY="):
-                    api_key = line.split("=", 1)[1].strip()
-                    break
+                line = line.strip()
+                if line.startswith("GEMINI_API_KEY"):
+                    # split on the first '=' regardless of spaces around it
+                    if "=" in line:
+                        api_key = line.split("=", 1)[1].strip()
+                        break
 
     if not api_key:
         raise RuntimeError("GEMINI_API_KEY is not set. Please set the GEMINI_API_KEY environment variable or put it in a .env file.")

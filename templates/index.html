@@ -1,476 +1,624 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Stride — Step Goal Coach</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #101914;
-    --surface: #16211a;
-    --surface-2: #1d2b22;
-    --line: #26362c;
-    --text: #edf2e9;
-    --text-dim: #8fa391;
-    --accent: #ff6b35;
-    --accent-soft: #ff6b3522;
-    --accent-2: #4fd1c5;
-    --accent-2-soft: #4fd1c522;
-    --radius: 14px;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stride — Step Goal Coach</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #101914;
+      --surface: #16211a;
+      --surface-2: #1d2b22;
+      --line: #26362c;
+      --text: #edf2e9;
+      --text-dim: #8fa391;
+      --accent: #ff6b35;
+      --accent-soft: #ff6b3522;
+      --accent-2: #4fd1c5;
+      --accent-2-soft: #4fd1c522;
+      --radius: 14px;
+    }
 
-  * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
-  body {
-    margin: 0;
-    background: var(--bg);
-    background-image:
-      radial-gradient(circle at 15% 0%, #1a2a1f 0%, transparent 45%),
-      radial-gradient(circle at 100% 30%, #17241c 0%, transparent 40%);
-    color: var(--text);
-    font-family: 'Inter', sans-serif;
-    min-height: 100vh;
-  }
+    body {
+      margin: 0;
+      background: var(--bg);
+      background-image:
+        radial-gradient(circle at 15% 0%, #1a2a1f 0%, transparent 45%),
+        radial-gradient(circle at 100% 30%, #17241c 0%, transparent 40%);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+    }
 
-  .wrap {
-    max-width: 1080px;
-    margin: 0 auto;
-    padding: 40px 24px 60px;
-  }
+    .wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 40px 24px 60px;
+    }
 
-  header {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    margin-bottom: 28px;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
+    header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
 
-  .brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-  .brand svg { flex-shrink: 0; }
+    .brand svg {
+      flex-shrink: 0;
+    }
 
-  h1 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin: 0;
-    letter-spacing: -0.01em;
-  }
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0;
+      letter-spacing: -0.01em;
+    }
 
-  .tagline {
-    color: var(--text-dim);
-    font-size: 0.85rem;
-  }
+    .tagline {
+      color: var(--text-dim);
+      font-size: 0.85rem;
+    }
 
-  .goal-editor {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--text-dim);
-    font-size: 0.85rem;
-  }
+    .goal-editor {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-dim);
+      font-size: 0.85rem;
+    }
 
-  .goal-editor input {
-    width: 110px;
-    background: var(--surface-2);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    color: var(--text);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.85rem;
-    padding: 6px 10px;
-  }
+    .goal-editor input {
+      width: 110px;
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      padding: 6px 10px;
+    }
 
-  .goal-editor button {
-    background: none;
-    border: 1px solid var(--line);
-    color: var(--text-dim);
-    border-radius: 8px;
-    padding: 6px 12px;
-    font-size: 0.8rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-  .goal-editor button:hover { border-color: var(--accent); color: var(--accent); }
+    .goal-editor button {
+      background: none;
+      border: 1px solid var(--line);
+      color: var(--text-dim);
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
 
-  .grid {
-    display: grid;
-    grid-template-columns: 1.15fr 1fr;
-    gap: 20px;
-  }
+    .goal-editor button:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
 
-  @media (max-width: 820px) {
-    .grid { grid-template-columns: 1fr; }
-  }
+    .grid {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 20px;
+    }
 
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 24px;
-  }
+    @media (max-width: 820px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
 
-  .card + .card { margin-top: 20px; }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
 
-  .card-label {
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-size: 0.72rem;
-    color: var(--text-dim);
-    font-weight: 600;
-    margin-bottom: 18px;
-  }
+    .card+.card {
+      margin-top: 20px;
+    }
 
-  /* --- Progress ring --- */
-  .ring-row {
-    display: flex;
-    align-items: center;
-    gap: 28px;
-  }
+    .card-label {
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
 
-  .ring-wrap { position: relative; width: 148px; height: 148px; flex-shrink: 0; }
-  .ring-wrap svg { transform: rotate(-90deg); }
-  .ring-bg { fill: none; stroke: var(--surface-2); stroke-width: 12; }
-  .ring-fg { fill: none; stroke: var(--accent); stroke-width: 12; stroke-linecap: round;
-    transition: stroke-dashoffset 0.6s cubic-bezier(.4,0,.2,1); }
-  .ring-center {
-    position: absolute; inset: 0; display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-  }
-  .ring-pct { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1.5rem; }
-  .ring-sub { font-size: 0.68rem; color: var(--text-dim); }
+    /* --- Progress ring --- */
+    .ring-row {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
 
-  .stat-list { display: flex; flex-direction: column; gap: 12px; flex: 1; min-width: 190px; }
-  .stat {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-    font-size: 0.9rem;
-    padding-bottom: 6px;
-    border-bottom: 1px dashed var(--line);
-  }
-  .stat:last-child { border-bottom: none; padding-bottom: 0; }
-  .stat .k { color: var(--text-dim); white-space: nowrap; }
-  .stat .v { font-family: 'JetBrains Mono', monospace; font-weight: 600; white-space: nowrap; }
-  .stat .v.accent { color: var(--accent); }
+    .ring-wrap {
+      position: relative;
+      width: 148px;
+      height: 148px;
+      flex-shrink: 0;
+    }
 
-  /* --- Weekly trail --- */
-  .trail {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 12px;
-    height: 100px;
-    margin-top: 14px;
-    margin-bottom: 16px;
-  }
+    .ring-wrap svg {
+      transform: rotate(-90deg);
+    }
 
-  .trail-day { display: flex; flex-direction: column; align-items: center; gap: 8px; flex: 1; }
-  .print-track { height: 65px; display: flex; align-items: flex-end; justify-content: center; }
-  .print { opacity: 0.45; transition: opacity 0.4s, transform 0.4s; transform: scale(0.9); }
-  .print.filled { opacity: 1; transform: scale(1.1); filter: drop-shadow(0 0 5px var(--accent-soft)); }
-  .print.today { filter: drop-shadow(0 0 8px var(--accent)); opacity: 1; }
-  .day-label { font-size: 0.75rem; color: var(--text); font-weight: 600; font-family: 'JetBrains Mono', monospace; margin-top: 4px; }
+    .ring-bg {
+      fill: none;
+      stroke: var(--surface-2);
+      stroke-width: 12;
+    }
 
-  .milestone-banner {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: var(--accent-2-soft);
-    border: 1px solid #4fd1c555;
-    color: var(--accent-2);
-    border-radius: 10px;
-    padding: 12px 16px;
-    font-size: 0.85rem;
-    margin-top: 8px;
-  }
+    .ring-fg {
+      fill: none;
+      stroke: var(--accent);
+      stroke-width: 12;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.6s cubic-bezier(.4, 0, .2, 1);
+    }
 
-  .weekly-total {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 1.7rem;
-    font-weight: 700;
-  }
+    .ring-center {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
 
-  /* --- Chat --- */
-  .chat-card { display: flex; flex-direction: column; height: 520px; }
-  .messages {
-    flex: 1;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    padding-right: 6px;
-    margin-bottom: 14px;
-  }
+    .ring-pct {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: 1.5rem;
+    }
 
-  .msg {
-    max-width: 84%;
-    padding: 12px 16px;
-    border-radius: 14px;
-    font-size: 0.92rem;
-    line-height: 1.45;
-  }
-  .msg.user {
-    align-self: flex-end;
-    background: var(--accent);
-    color: #1a0d05;
-    border-bottom-right-radius: 3px;
-  }
-  .msg.coach {
-    align-self: flex-start;
-    background: var(--surface-2);
-    border: 1px solid var(--line);
-    border-bottom-left-radius: 3px;
-  }
-  .msg.error { border-color: #a33; color: #ff9e9e; }
+    .ring-sub {
+      font-size: 0.68rem;
+      color: var(--text-dim);
+    }
 
-  .chat-input-row { display: flex; gap: 10px; }
-  .chat-input-row input {
-    flex: 1;
-    background: var(--surface-2);
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    color: var(--text);
-    padding: 12px 16px;
-    font-size: 0.9rem;
-    font-family: 'Inter', sans-serif;
-  }
-  .chat-input-row input:focus { outline: none; border-color: var(--accent); }
-  .chat-input-row button {
-    background: var(--accent);
-    color: #1a0d05;
-    border: none;
-    border-radius: 10px;
-    padding: 0 20px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: opacity 0.2s ease;
-  }
-  .chat-input-row button:disabled { opacity: 0.5; cursor: default; }
+    .stat-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+      min-width: 190px;
+    }
 
-  .quick-row { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
-  .quick-btn {
-    background: none;
-    border: 1px dashed var(--line);
-    color: var(--text-dim);
-    border-radius: 20px;
-    padding: 6px 14px;
-    font-size: 0.8rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-  .quick-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .stat {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      font-size: 0.9rem;
+      padding-bottom: 6px;
+      border-bottom: 1px dashed var(--line);
+    }
 
-  .typing { color: var(--text-dim); font-size: 0.82rem; font-style: italic; }
-</style>
+    .stat:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .stat .k {
+      color: var(--text-dim);
+      white-space: nowrap;
+    }
+
+    .stat .v {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .stat .v.accent {
+      color: var(--accent);
+    }
+
+    /* --- Weekly trail --- */
+    .trail {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 12px;
+      height: 100px;
+      margin-top: 14px;
+      margin-bottom: 16px;
+    }
+
+    .trail-day {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+    }
+
+    .print-track {
+      height: 65px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .print {
+      opacity: 0.45;
+      transition: opacity 0.4s, transform 0.4s;
+      transform: scale(0.9);
+    }
+
+    .print.filled {
+      opacity: 1;
+      transform: scale(1.1);
+      filter: drop-shadow(0 0 5px var(--accent-soft));
+    }
+
+    .print.today {
+      filter: drop-shadow(0 0 8px var(--accent));
+      opacity: 1;
+    }
+
+    .day-label {
+      font-size: 0.75rem;
+      color: var(--text);
+      font-weight: 600;
+      font-family: 'JetBrains Mono', monospace;
+      margin-top: 4px;
+    }
+
+    .milestone-banner {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--accent-2-soft);
+      border: 1px solid #4fd1c555;
+      color: var(--accent-2);
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 0.85rem;
+      margin-top: 8px;
+    }
+
+    .weekly-total {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.7rem;
+      font-weight: 700;
+    }
+
+    /* --- Chat --- */
+    .chat-card {
+      display: flex;
+      flex-direction: column;
+      height: 520px;
+    }
+
+    .messages {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding-right: 6px;
+      margin-bottom: 14px;
+    }
+
+    .msg {
+      max-width: 84%;
+      padding: 12px 16px;
+      border-radius: 14px;
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+
+    .msg.user {
+      align-self: flex-end;
+      background: var(--accent);
+      color: #1a0d05;
+      border-bottom-right-radius: 3px;
+    }
+
+    .msg.coach {
+      align-self: flex-start;
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-bottom-left-radius: 3px;
+    }
+
+    .msg.error {
+      border-color: #a33;
+      color: #ff9e9e;
+    }
+
+    .chat-input-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .chat-input-row input {
+      flex: 1;
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      color: var(--text);
+      padding: 12px 16px;
+      font-size: 0.9rem;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .chat-input-row input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .chat-input-row button {
+      background: var(--accent);
+      color: #1a0d05;
+      border: none;
+      border-radius: 10px;
+      padding: 0 20px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+    }
+
+    .chat-input-row button:disabled {
+      opacity: 0.5;
+      cursor: default;
+    }
+
+    .quick-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    .quick-btn {
+      background: none;
+      border: 1px dashed var(--line);
+      color: var(--text-dim);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .quick-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .typing {
+      color: var(--text-dim);
+      font-size: 0.82rem;
+      font-style: italic;
+    }
+  </style>
 </head>
+
 <body>
-<div class="wrap">
+  <div class="wrap">
 
-  <header>
-    <div class="brand">
-      <svg width="30" height="30" viewBox="0 0 24 24" fill="none">
-        <path d="M12 2C9 2 8 5 8 7c0 2.5 1.8 3.5 1.8 6 0 2-1.3 2.5-1.3 4.5 0 1.7 1.3 3 3 3s3-1.3 3-3c0-1.5-.7-2-.7-4 0-2.8 2.2-3.7 2.2-6.5 0-3-1.5-5-4-5z" fill="#ff6b35"/>
-      </svg>
-      <div>
-        <h1>Stride</h1>
-        <div class="tagline">your daily step goal coach</div>
+    <header>
+      <div class="brand">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none">
+          <path
+            d="M12 2C9 2 8 5 8 7c0 2.5 1.8 3.5 1.8 6 0 2-1.3 2.5-1.3 4.5 0 1.7 1.3 3 3 3s3-1.3 3-3c0-1.5-.7-2-.7-4 0-2.8 2.2-3.7 2.2-6.5 0-3-1.5-5-4-5z"
+            fill="#ff6b35" />
+        </svg>
+        <div>
+          <h1>Stride</h1>
+          <div class="tagline">your daily step goal coach</div>
+        </div>
       </div>
-    </div>
-    <div class="goal-editor">
-      <span id="goalLabel">Goal: 8,000</span>
-      <input id="goalInput" type="number" placeholder="New goal" />
-      <button id="goalBtn">Set</button>
-    </div>
-  </header>
+      <div class="goal-editor">
+        <span id="goalLabel">Goal: 8,000</span>
+        <input id="goalInput" type="number" placeholder="New goal" />
+        <button id="goalBtn">Set</button>
+      </div>
+    </header>
 
-  <div class="grid">
+    <div class="grid">
 
-    <!-- LEFT: Chat with agent -->
-    <div class="card chat-card">
-      <div class="card-label">Talk to your coach</div>
-      <div class="messages" id="messages">
-        <div class="msg coach">Hey! Tell me how many steps you've walked and I'll track it against your goal — try one of the quick buttons below, or type your own.</div>
-      </div>
-      <div class="quick-row">
-        <button class="quick-btn" data-msg="I just walked 1000 steps">+1,000 steps</button>
-        <button class="quick-btn" data-msg="I just walked 2500 steps">+2,500 steps</button>
-        <button class="quick-btn" data-msg="How am I doing today?">How am I doing?</button>
-        <button class="quick-btn" data-msg="What's my week looking like?">This week</button>
-      </div>
-      <div class="chat-input-row">
-        <input id="chatInput" type="text" placeholder="e.g. I just walked 3200 steps" />
-        <button id="sendBtn">Send</button>
-      </div>
-    </div>
-
-    <!-- RIGHT: Dashboard -->
-    <div>
-      <div class="card">
-        <div class="card-label">Today</div>
-        <div class="ring-row">
-          <div class="ring-wrap">
-            <svg width="148" height="148" viewBox="0 0 148 148">
-              <circle class="ring-bg" cx="74" cy="74" r="62"></circle>
-              <circle class="ring-fg" id="ringFg" cx="74" cy="74" r="62"
-                stroke-dasharray="389.6" stroke-dashoffset="389.6"></circle>
-            </svg>
-            <div class="ring-center">
-              <div class="ring-pct" id="ringPct">0%</div>
-              <div class="ring-sub">of goal</div>
-            </div>
-          </div>
-          <div class="stat-list">
-            <div class="stat"><span class="k">Steps today</span><span class="v" id="stepsToday">0</span></div>
-            <div class="stat"><span class="k">Remaining</span><span class="v accent" id="stepsRemaining">8,000</span></div>
-            <div class="stat"><span class="k">Daily goal</span><span class="v" id="dailyGoal">8,000</span></div>
-          </div>
+      <!-- LEFT: Chat with agent -->
+      <div class="card chat-card">
+        <div class="card-label">Talk to your coach</div>
+        <div class="messages" id="messages">
+          <div class="msg coach">Hey! Tell me how many steps you've walked and I'll track it against your goal — try one
+            of the quick buttons below, or type your own.</div>
+        </div>
+        <div class="quick-row">
+          <button class="quick-btn" data-msg="I just walked 1000 steps">+1,000 steps</button>
+          <button class="quick-btn" data-msg="I just walked 2500 steps">+2,500 steps</button>
+          <button class="quick-btn" data-msg="How am I doing today?">How am I doing?</button>
+          <button class="quick-btn" data-msg="What's my week looking like?">This week</button>
+        </div>
+        <div class="chat-input-row">
+          <input id="chatInput" type="text" placeholder="e.g. I just walked 3200 steps" />
+          <button id="sendBtn">Send</button>
         </div>
       </div>
 
-      <div class="card">
-        <div class="card-label">This week (rolling 7 days)</div>
-        <div class="weekly-total" id="weeklyTotal">0</div>
-        <div class="trail" id="trail"></div>
-        <div id="milestoneBanner"></div>
+      <!-- RIGHT: Dashboard -->
+      <div>
+        <div class="card">
+          <div class="card-label">Today</div>
+          <div class="ring-row">
+            <div class="ring-wrap">
+              <svg width="148" height="148" viewBox="0 0 148 148">
+                <circle class="ring-bg" cx="74" cy="74" r="62"></circle>
+                <circle class="ring-fg" id="ringFg" cx="74" cy="74" r="62" stroke-dasharray="389.6"
+                  stroke-dashoffset="389.6"></circle>
+              </svg>
+              <div class="ring-center">
+                <div class="ring-pct" id="ringPct">0%</div>
+                <div class="ring-sub">of goal</div>
+              </div>
+            </div>
+            <div class="stat-list">
+              <div class="stat"><span class="k">Steps today</span><span class="v" id="stepsToday">0</span></div>
+              <div class="stat"><span class="k">Remaining</span><span class="v accent" id="stepsRemaining">8,000</span>
+              </div>
+              <div class="stat"><span class="k">Daily goal</span><span class="v" id="dailyGoal">8,000</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-label">This week (rolling 7 days)</div>
+          <div class="weekly-total" id="weeklyTotal">0</div>
+          <div class="trail" id="trail"></div>
+          <div id="milestoneBanner"></div>
+        </div>
       </div>
+
     </div>
-
   </div>
-</div>
 
-<script>
-const messagesEl = document.getElementById('messages');
-const chatInput = document.getElementById('chatInput');
-const sendBtn = document.getElementById('sendBtn');
+  <script>
+    const messagesEl = document.getElementById('messages');
+    const chatInput = document.getElementById('chatInput');
+    const sendBtn = document.getElementById('sendBtn');
 
-function fmt(n) { return Number(n).toLocaleString(); }
+    function fmt(n) { return Number(n).toLocaleString(); }
 
-function addMsg(text, cls) {
-  const div = document.createElement('div');
-  div.className = 'msg ' + cls;
-  div.textContent = text;
-  messagesEl.appendChild(div);
-  messagesEl.scrollTop = messagesEl.scrollHeight;
-  return div;
-}
+    function addMsg(text, cls) {
+      const div = document.createElement('div');
+      div.className = 'msg ' + cls;
+      div.textContent = text;
+      messagesEl.appendChild(div);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+      return div;
+    }
 
-function footprintSVG(filled) {
-  const color = filled ? 'var(--accent)' : '#4a6150';
-  return `<svg class="print" width="20" height="30" viewBox="0 0 24 24" fill="none">
+    function footprintSVG(filled) {
+      const color = filled ? 'var(--accent)' : '#4a6150';
+      return `<svg class="print" width="20" height="30" viewBox="0 0 24 24" fill="none">
     <path d="M12 2C9 2 8 5 8 7c0 2.5 1.8 3.5 1.8 6 0 2-1.3 2.5-1.3 4.5 0 1.7 1.3 3 3 3s3-1.3 3-3c0-1.5-.7-2-.7-4 0-2.8 2.2-3.7 2.2-6.5 0-3-1.5-5-4-5z" fill="${color}"/>
   </svg>`;
-}
+    }
 
-function renderState(state) {
-  const p = state.progress;
-  const w = state.weekly;
+    function renderState(state) {
+      const p = state.progress;
+      const w = state.weekly;
 
-  document.getElementById('stepsToday').textContent = fmt(p.steps_today);
-  document.getElementById('stepsRemaining').textContent = p.goal_met ? 'Goal met!' : fmt(p.steps_remaining);
-  document.getElementById('dailyGoal').textContent = fmt(p.goal);
-  document.getElementById('goalLabel').textContent = 'Goal: ' + fmt(p.goal);
+      document.getElementById('stepsToday').textContent = fmt(p.steps_today);
+      document.getElementById('stepsRemaining').textContent = p.goal_met ? 'Goal met!' : fmt(p.steps_remaining);
+      document.getElementById('dailyGoal').textContent = fmt(p.goal);
+      document.getElementById('goalLabel').textContent = 'Goal: ' + fmt(p.goal);
 
-  const circumference = 389.6;
-  const offset = circumference - (Math.min(100, p.percent_complete) / 100) * circumference;
-  document.getElementById('ringFg').style.strokeDashoffset = offset;
-  document.getElementById('ringPct').textContent = Math.round(p.percent_complete) + '%';
+      const circumference = 389.6;
+      const offset = circumference - (Math.min(100, p.percent_complete) / 100) * circumference;
+      document.getElementById('ringFg').style.strokeDashoffset = offset;
+      document.getElementById('ringPct').textContent = Math.round(p.percent_complete) + '%';
 
-  document.getElementById('weeklyTotal').textContent = fmt(w.weekly_total) + ' steps';
+      document.getElementById('weeklyTotal').textContent = fmt(w.weekly_total) + ' steps';
 
-  const trail = document.getElementById('trail');
-  trail.innerHTML = '';
-  const entries = Object.entries(w.daily_breakdown);
-  const todayStr = new Date().toISOString().slice(0, 10);
-  entries.forEach(([dateStr, steps]) => {
-    const isToday = dateStr === todayStr;
-    const filled = steps > 0;
-    const dayLabel = new Date(dateStr + 'T00:00:00').toLocaleDateString(undefined, { weekday: 'short' })[0];
-    const col = document.createElement('div');
-    col.className = 'trail-day';
-    col.innerHTML = `
+      const trail = document.getElementById('trail');
+      trail.innerHTML = '';
+      const entries = Object.entries(w.daily_breakdown);
+      const todayStr = new Date().toISOString().slice(0, 10);
+      entries.forEach(([dateStr, steps]) => {
+        const isToday = dateStr === todayStr;
+        const filled = steps > 0;
+        const dayLabel = new Date(dateStr + 'T00:00:00').toLocaleDateString(undefined, { weekday: 'short' })[0];
+        const col = document.createElement('div');
+        col.className = 'trail-day';
+        col.innerHTML = `
       <div class="print-track">${footprintSVG(filled)}</div>
       <div class="day-label">${dayLabel}</div>
     `;
-    if (isToday) col.querySelector('.print').classList.add('today');
-    if (filled) col.querySelector('.print').classList.add('filled');
-    trail.appendChild(col);
-  });
+        if (isToday) col.querySelector('.print').classList.add('today');
+        if (filled) col.querySelector('.print').classList.add('filled');
+        trail.appendChild(col);
+      });
 
-  const banner = document.getElementById('milestoneBanner');
-  if (w.newly_reached_milestone) {
-    banner.innerHTML = `<div class="milestone-banner">🏅 Milestone unlocked — ${fmt(w.newly_reached_milestone)} steps this week!</div>`;
-  } else if (w.next_milestone) {
-    banner.innerHTML = `<div class="milestone-banner" style="opacity:0.7">Next milestone: ${fmt(w.next_milestone)} steps (${fmt(w.steps_to_next_milestone)} to go)</div>`;
-  } else {
-    banner.innerHTML = '';
-  }
-}
-
-async function fetchState() {
-  const res = await fetch('/api/state');
-  const state = await res.json();
-  renderState(state);
-}
-
-async function sendMessage(text) {
-  if (!text) return;
-  addMsg(text, 'user');
-  chatInput.value = '';
-  sendBtn.disabled = true;
-  const typingEl = addMsg('Stride is thinking…', 'coach typing');
-
-  try {
-    const res = await fetch('/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: text })
-    });
-    const data = await res.json();
-    typingEl.remove();
-
-    if (data.error) {
-      addMsg('⚠ ' + data.error, 'coach error');
-    } else {
-      addMsg(data.reply, 'coach');
-      renderState(data.state);
+      const banner = document.getElementById('milestoneBanner');
+      if (w.newly_reached_milestone) {
+        banner.innerHTML = `<div class="milestone-banner">🏅 Milestone unlocked — ${fmt(w.newly_reached_milestone)} steps this week!</div>`;
+      } else if (w.next_milestone) {
+        banner.innerHTML = `<div class="milestone-banner" style="opacity:0.7">Next milestone: ${fmt(w.next_milestone)} steps (${fmt(w.steps_to_next_milestone)} to go)</div>`;
+      } else {
+        banner.innerHTML = '';
+      }
     }
-  } catch (e) {
-    typingEl.remove();
-    addMsg('⚠ Could not reach the server.', 'coach error');
-  } finally {
-    sendBtn.disabled = false;
-  }
-}
 
-sendBtn.addEventListener('click', () => sendMessage(chatInput.value.trim()));
-chatInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') sendMessage(chatInput.value.trim()); });
-document.querySelectorAll('.quick-btn').forEach(btn => {
-  btn.addEventListener('click', () => sendMessage(btn.dataset.msg));
-});
+    async function fetchState() {
+      const res = await fetch('/api/state');
+      const state = await res.json();
+      renderState(state);
+    }
 
-document.getElementById('goalBtn').addEventListener('click', async () => {
-  const val = parseInt(document.getElementById('goalInput').value, 10);
-  if (!val || val <= 0) return;
-  const res = await fetch('/api/goal', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ goal: val })
-  });
-  if (res.ok) { document.getElementById('goalInput').value = ''; fetchState(); }
-});
+    async function sendMessage(text) {
+      if (!text) return;
+      addMsg(text, 'user');
+      chatInput.value = '';
+      sendBtn.disabled = true;
+      const typingEl = addMsg('Stride is thinking…', 'coach typing');
 
-fetchState();
-</script>
+      try {
+        const res = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: text })
+        });
+        const data = await res.json();
+        typingEl.remove();
+
+        if (data.error) {
+          addMsg('⚠ ' + data.error, 'coach error');
+        } else {
+          addMsg(data.reply, 'coach');
+          renderState(data.state);
+        }
+      } catch (e) {
+        typingEl.remove();
+        addMsg('⚠ Could not reach the server.', 'coach error');
+      } finally {
+        sendBtn.disabled = false;
+      }
+    }
+
+    sendBtn.addEventListener('click', () => sendMessage(chatInput.value.trim()));
+    chatInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') sendMessage(chatInput.value.trim()); });
+    document.querySelectorAll('.quick-btn').forEach(btn => {
+      btn.addEventListener('click', () => sendMessage(btn.dataset.msg));
+    });
+
+    document.getElementById('goalBtn').addEventListener('click', async () => {
+      const val = parseInt(document.getElementById('goalInput').value, 10);
+      if (!val || val <= 0) return;
+      const res = await fetch('/api/goal', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ goal: val })
+      });
+      if (res.ok) { document.getElementById('goalInput').value = ''; fetchState(); }
+    });
+
+    fetchState();
+  </script>
 </body>
+
 </html>
